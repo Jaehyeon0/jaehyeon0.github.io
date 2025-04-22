@@ -13,7 +13,7 @@
       }
       #main {
         display: flex;
-        height: 80vh;
+        height: 70vh;
       }
       #editor {
         width: 25%;
@@ -323,7 +323,7 @@ FlareLane.setTags({
         });
       });
 
-      function runCode() {
+      async function runCode() {
         const code = editor.getValue();
         const outputEl = document.getElementById("output");
         outputEl.innerHTML = "";
@@ -352,7 +352,7 @@ FlareLane.setTags({
           const AsyncFunction = Object.getPrototypeOf(
             async function () {}
           ).constructor;
-          const result = new AsyncFunction(code)();
+          const result = await new AsyncFunction(code)();
           if (result !== undefined) {
             const resultLine = document.createElement("div");
             resultLine.textContent = "Result: " + result;
