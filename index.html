@@ -187,7 +187,7 @@
       </div>
     </div>
 
-    <button onclick="runCode()">▶ Run v2</button>
+    <button onclick="runCode()">▶ Run</button>
     <div id="output">Console Output:</div>
 
     <!-- FlareLane SDK -->
@@ -205,10 +205,10 @@
             : "device가 등록되지 않았습니다";
         });
 
-        const stored = localStorage.getItem("flarelaneUser");
-        if (stored) {
-          console.log("💾 저장된 유저 정보:", JSON.parse(stored));
-        }
+        // const stored = localStorage.getItem("flarelaneUser");
+        // if (stored) {
+        //   console.log("💾 저장된 유저 정보:", JSON.parse(stored));
+        // }
       });
 
       function showSignup() {
@@ -317,6 +317,10 @@ FlareLane.setTags({
             fontSize: 14,
           }
         );
+
+        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+          runCode();
+        });
       });
 
       function runCode() {
