@@ -5,21 +5,21 @@ require.config({
 require(["vs/editor/editor.main"], function () {
   window.editor = monaco.editor.create(document.getElementById("editor"), {
     value: `// FlareLane.setUserId("user123")
-  // FlareLane.setTags({ gender: "men", age: 24 });
-  // FlareLane.setUserAttributes({
-  //   "name": "김철수",
-  //   "phoneNumber": "+821012341234",
-  //   "dob": "1992-03-01",
-  //   "email": "kevin@flarelane.com",
-  //   "country": "KR",
-  //   "language": "ko",
-  //   "timeZone": "Asia/Seoul"
-  // });
-  // FlareLane.trackEvent("click", { "key" : "value" })
-  // FlareLane.getDeviceId((deviceId) => {
-  //    // Do something...
-  //    console.log(deviceId);
-  // });
+// FlareLane.setTags({ gender: "men", age: 24 });
+// FlareLane.setUserAttributes({
+//   "name": "김철수",
+//   "phoneNumber": "+821012341234",
+//   "dob": "1992-03-01",
+//   "email": "kevin@flarelane.com",
+//   "country": "KR",
+//   "language": "ko",
+//   "timeZone": "Asia/Seoul"
+// });
+// FlareLane.trackEvent("click", { "key" : "value" })
+// FlareLane.getDeviceId((deviceId) => {
+//    // Do something...
+//    console.log(deviceId);
+// });
           `,
     language: "javascript",
     theme: "vs-dark",

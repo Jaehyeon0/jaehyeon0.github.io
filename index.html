@@ -11,10 +11,27 @@
         background: #1e1e1e;
         color: #ffffff;
       }
-      #editor {
+
+      #main {
+        display: flex;
         height: 80vh;
-        width: 25%;
       }
+
+      #editor {
+        width: 25%;
+        background: #1e1e1e;
+      }
+
+      #blank-space {
+        width: 75%;
+        background: #e8e1d3;
+        border-left: 1px solid #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
       #output {
         background: #252526;
         color: #9cdcfe;
@@ -24,6 +41,7 @@
         height: 30vh;
         overflow-y: auto;
       }
+
       button {
         background: #0e639c;
         color: white;
@@ -32,15 +50,146 @@
         font-size: 14px;
         cursor: pointer;
       }
+
+      .login-box {
+        width: 620px;
+        height: 800px;
+        background: white;
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        color: #1c1c1c;
+      }
+
+      .login-box img {
+        height: 40px;
+        margin-bottom: 24px;
+      }
+
+      .login-box label {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .login-box input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 4px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .login-box .forgot {
+        text-align: right;
+        margin-bottom: 16px;
+      }
+
+      .login-box .forgot a {
+        font-size: 12px;
+        color: #003366;
+        text-decoration: none;
+      }
+
+      .login-box button.login-btn {
+        width: 100%;
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .login-box .divider {
+        margin: 16px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .login-box .divider hr {
+        flex: 1;
+        border: none;
+        height: 1px;
+        background: #ddd;
+      }
+
+      .login-box .divider span {
+        margin: 0 8px;
+        color: #aaa;
+        font-size: 12px;
+      }
+
+      .login-box .google-btn {
+        width: 100%;
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 14px;
+      }
+
+      .login-box .signup {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 12px;
+      }
+
+      .login-box .signup a {
+        color: #003366;
+        text-decoration: none;
+      }
+
+      #device-id-display {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 14px;
+        color: #003366;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
-    <div id="editor"></div>
+    <div id="main">
+      <div id="editor"></div>
+
+      <div id="blank-space">
+        <div id="device-id-display">Device ID: 로딩 중...</div>
+
+        <div class="login-box">
+          <div style="text-align: center">
+            <img src="logo.png" alt="FlareLane Logo" style="height: 40px" />
+          </div>
+          <div style="margin-bottom: 16px">
+            <label>이메일</label>
+            <input type="email" placeholder="email@address.com" />
+          </div>
+          <div style="margin-bottom: 8px">
+            <label>비밀번호</label>
+            <input type="password" placeholder="비밀번호 입력" />
+          </div>
+          <div class="forgot">
+            <a href="#">비밀번호를 잊어버리셨나요?</a>
+          </div>
+          <button class="login-btn">로그인</button>
+          <div class="divider">
+            <hr />
+            <span>또는</span>
+            <hr />
+          </div>
+          <div class="signup">회원이 아니신가요? <a href="#">회원가입</a></div>
+        </div>
+      </div>
+    </div>
+
     <button onclick="runCode()">▶ Run v2</button>
     <div id="output">Console Output:</div>
 
     <!-- FlareLane 스테이징 -->
-    <h2>staging</h2>
     <script
       src="https://cdn.flarelane.com/WebSDK-staging.js"
       charset="UTF-8"
@@ -49,13 +198,26 @@
       FlareLane.initialize({
         projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
       });
+
+      window.addEventListener("load", () => {
+        try {
+          FlareLane.getDeviceId((deviceId) => {
+            const el = document.getElementById("device-id-display");
+            if (deviceId) {
+              el.textContent = `Device ID: ${deviceId}`;
+              console.log("Device ID:", deviceId);
+            } else {
+              el.textContent = "device가 등록되지 않았습니다";
+            }
+          });
+        } catch (err) {
+          const el = document.getElementById("device-id-display");
+          el.textContent = "device가 등록되지 않았습니다";
+        }
+      });
     </script>
 
-    <!-- projdction -->
-    <!-- <h2>production</h2> -->
-    <!-- <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script> -->
-    <!-- <script> FlareLane.initialize({ projectId: "2290ab3c-e6c8-423a-9576-c54fba1d9da0" }); </script> -->
-
+    <!-- Monaco Editor -->
     <script src="https://unpkg.com/monaco-editor@0.34.1/min/vs/loader.js"></script>
     <script src="editor-script.js"></script>
   </body>
