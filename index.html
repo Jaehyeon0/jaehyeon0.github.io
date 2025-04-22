@@ -11,27 +11,24 @@
         background: #1e1e1e;
         color: #ffffff;
       }
-
       #main {
         display: flex;
         height: 80vh;
       }
-
       #editor {
         width: 25%;
         background: #1e1e1e;
       }
-
       #blank-space {
         width: 75%;
-        background: #e8e1d3;
+        background: #f7f5f2;
         border-left: 1px solid #333;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        padding-top: 40px;
         position: relative;
       }
-
       #output {
         background: #252526;
         color: #9cdcfe;
@@ -41,7 +38,6 @@
         height: 30vh;
         overflow-y: auto;
       }
-
       button {
         background: #0e639c;
         color: white;
@@ -50,106 +46,62 @@
         font-size: 14px;
         cursor: pointer;
       }
-
       .login-box {
-        width: 620px;
-        height: 800px;
+        width: 420px;
         background: white;
         padding: 32px;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         color: #1c1c1c;
       }
-
-      .login-box img {
-        height: 40px;
+      .login-box .logo-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 24px;
       }
-
       .login-box label {
         font-size: 12px;
         color: #888;
+        display: block;
+        margin-bottom: 4px;
       }
-
-      .login-box input {
+      .login-box input,
+      .login-box select {
         width: 100%;
         padding: 10px;
-        margin-top: 4px;
         border: 1px solid #ddd;
         border-radius: 4px;
-      }
-
-      .login-box .forgot {
-        text-align: right;
         margin-bottom: 16px;
+        font-size: 14px;
       }
-
-      .login-box .forgot a {
-        font-size: 12px;
-        color: #003366;
-        text-decoration: none;
-      }
-
-      .login-box button.login-btn {
+      .login-box .login-btn {
         width: 100%;
         background-color: #003366;
         color: white;
-        padding: 10px;
+        padding: 12px;
         border: none;
         border-radius: 4px;
         font-size: 14px;
+        cursor: pointer;
+        margin-top: 8px;
       }
-
-      .login-box .divider {
-        margin: 16px 0;
-        display: flex;
-        align-items: center;
-      }
-
-      .login-box .divider hr {
-        flex: 1;
-        border: none;
-        height: 1px;
-        background: #ddd;
-      }
-
-      .login-box .divider span {
-        margin: 0 8px;
-        color: #aaa;
-        font-size: 12px;
-      }
-
-      .login-box .google-btn {
-        width: 100%;
-        background: white;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-size: 14px;
-      }
-
       .login-box .signup {
         text-align: center;
         margin-top: 24px;
         font-size: 12px;
       }
-
-      .login-box .signup a {
-        color: #003366;
-        text-decoration: none;
-      }
-
-      #device-id-display {
+      #device-info-container {
         position: absolute;
         top: 20px;
         right: 30px;
         font-size: 14px;
         color: #003366;
         font-weight: bold;
+        text-align: left;
+      }
+      #device-info-container div {
+        margin-bottom: 4px;
       }
     </style>
   </head>
@@ -158,30 +110,79 @@
       <div id="editor"></div>
 
       <div id="blank-space">
-        <div id="device-id-display">Device ID: 로딩 중...</div>
+        <div id="device-info-container">
+          <div id="device-id-display">DeviceId: 로딩 중...</div>
+        </div>
 
         <div class="login-box">
-          <div style="text-align: center">
-            <img src="logo.png" alt="FlareLane Logo" style="height: 40px" />
+          <div class="logo-title">
+            <img src="logo.png" alt="FlareLane Logo" />
           </div>
-          <div style="margin-bottom: 16px">
+
+          <!-- 로그인 폼 -->
+          <div id="login-form">
             <label>이메일</label>
             <input type="email" placeholder="email@address.com" />
-          </div>
-          <div style="margin-bottom: 8px">
             <label>비밀번호</label>
             <input type="password" placeholder="비밀번호 입력" />
+            <button class="login-btn">로그인</button>
+            <div class="signup">
+              회원이 아니신가요? <a href="#" onclick="showSignup()">회원가입</a>
+            </div>
           </div>
-          <div class="forgot">
-            <a href="#">비밀번호를 잊어버리셨나요?</a>
+
+          <!-- 회원가입 폼 -->
+          <div id="signup-form" style="display: none">
+            <label>이메일</label>
+            <input type="email" placeholder="email@address.com" />
+            <label>비밀번호</label>
+            <input type="password" placeholder="비밀번호 입력" />
+            <label>이름</label>
+            <input type="text" placeholder="이름 입력" />
+            <label>전화번호</label>
+            <input type="tel" placeholder="010-0000-0000" />
+            <label>생년월일</label>
+            <input type="text" placeholder="1992-05-26" />
+            <label>성별</label>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                margin-bottom: 16px;
+              "
+            >
+              <label
+                style="display: flex; align-items: center; gap: 6px; margin: 0"
+              >
+                <input
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  style="transform: translateY(1px)"
+                />
+                <span>남</span>
+              </label>
+              <label
+                style="display: flex; align-items: center; gap: 6px; margin: 0"
+              >
+                <input
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  style="transform: translateY(1px)"
+                />
+                <span>여</span>
+              </label>
+            </div>
+
+            <label>나이</label>
+            <input type="text" placeholder="숫자만 입력 (예: 32)" />
+            <button class="login-btn" onclick="handleSignup()">가입하기</button>
+            <div class="signup">
+              이미 회원이신가요? <a href="#" onclick="showLogin()">로그인</a>
+            </div>
           </div>
-          <button class="login-btn">로그인</button>
-          <div class="divider">
-            <hr />
-            <span>또는</span>
-            <hr />
-          </div>
-          <div class="signup">회원이 아니신가요? <a href="#">회원가입</a></div>
         </div>
       </div>
     </div>
@@ -189,36 +190,183 @@
     <button onclick="runCode()">▶ Run v2</button>
     <div id="output">Console Output:</div>
 
-    <!-- FlareLane 스테이징 -->
-    <script
-      src="https://cdn.flarelane.com/WebSDK-staging.js"
-      charset="UTF-8"
-    ></script>
+    <!-- FlareLane SDK -->
+    <script src="https://cdn.flarelane.com/WebSDK-staging.js"></script>
     <script>
       FlareLane.initialize({
         projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
       });
 
       window.addEventListener("load", () => {
-        try {
-          FlareLane.getDeviceId((deviceId) => {
-            const el = document.getElementById("device-id-display");
-            if (deviceId) {
-              el.textContent = `Device ID: ${deviceId}`;
-              console.log("Device ID:", deviceId);
-            } else {
-              el.textContent = "device가 등록되지 않았습니다";
-            }
-          });
-        } catch (err) {
+        FlareLane.getDeviceId((deviceId) => {
           const el = document.getElementById("device-id-display");
-          el.textContent = "device가 등록되지 않았습니다";
+          el.textContent = deviceId
+            ? `Device ID: ${deviceId}`
+            : "device가 등록되지 않았습니다";
+        });
+
+        const stored = localStorage.getItem("flarelaneUser");
+        if (stored) {
+          console.log("💾 저장된 유저 정보:", JSON.parse(stored));
         }
       });
+
+      function showSignup() {
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("signup-form").style.display = "block";
+      }
+
+      function showLogin() {
+        document.getElementById("signup-form").style.display = "none";
+        document.getElementById("login-form").style.display = "block";
+      }
+
+      function handleSignup() {
+        const form = document.querySelector("#signup-form");
+
+        const email = form.querySelector("input[type='email']").value;
+        const password = form.querySelector(
+          "input[placeholder='비밀번호 입력']"
+        ).value;
+        const name = form.querySelector("input[placeholder='이름 입력']").value;
+        const phone = `+82${form
+          .querySelector("input[type='tel']")
+          .value.replace(/-/g, "")
+          .slice(1)}`;
+        const dob = form.querySelector("input[placeholder='1992-05-26']").value;
+        const gender =
+          form.querySelector("input[name='gender']:checked")?.value || "";
+        const age = Number(
+          form.querySelector("input[placeholder*='숫자만 입력']").value
+        );
+
+        const userData = { email, password, name, phone, dob, gender, age };
+        localStorage.setItem("flarelaneUser", JSON.stringify(userData));
+        alert("가입 정보가 저장되었습니다!");
+
+        // Monaco Editor 내용 덮어쓰기
+        const code = `
+FlareLane.setUserId("${email}");
+
+FlareLane.setUserAttributes({
+  "name": "${name}",
+  "phoneNumber": "${phone}",
+  "dob": "${dob}",
+  "email": "${email}"
+});
+
+FlareLane.setTags({
+  gender: "${gender}",
+  age: ${age}
+});`;
+        editor.setValue(code.trim());
+
+        // 사용자 정보 시각화
+        const container = document.getElementById("device-info-container");
+
+        // 기존 내용 제거 (Device ID는 유지)
+        container.querySelectorAll(".user-info").forEach((e) => e.remove());
+
+        const info = document.createElement("div");
+        info.className = "user-info";
+        info.style.marginTop = "12px";
+        info.style.fontSize = "13px";
+        info.style.lineHeight = "1.6";
+        info.innerHTML = `
+          <div style="font-weight: bold;">📦 userAttributes</div>
+          <div>- userId: ${email}</div>
+          <div>- name: ${name}</div>
+          <div>- phoneNumber: ${phone}</div>
+          <div>- dob: ${dob}</div>
+
+          <div style="font-weight: bold; margin-top: 12px;">🏷️ tags</div>
+          <div>- gender: ${gender}</div>
+          <div>- age: ${age}</div>
+        `;
+        container.appendChild(info);
+      }
     </script>
 
     <!-- Monaco Editor -->
     <script src="https://unpkg.com/monaco-editor@0.34.1/min/vs/loader.js"></script>
-    <script src="editor-script.js"></script>
+    <script>
+      require.config({
+        paths: { vs: "https://unpkg.com/monaco-editor@0.34.1/min/vs" },
+      });
+      require(["vs/editor/editor.main"], function () {
+        window.editor = monaco.editor.create(
+          document.getElementById("editor"),
+          {
+            value: `// FlareLane.setTags({ gender: "men", age: 24 });
+// FlareLane.setUserAttributes({
+//   "name": "김철수",
+//   "phoneNumber": "+821012341234",
+//   "dob": "1992-03-01",
+//   "email": "kevin@flarelane.com",
+//   "country": "KR",
+//   "language": "ko",
+//   "timeZone": "Asia/Seoul"
+// });
+// FlareLane.trackEvent("click", { "key" : "value" })
+// FlareLane.getDeviceId((deviceId) => {
+//   // Do something...
+//   console.log(deviceId);
+// });`,
+            language: "javascript",
+            theme: "vs-dark",
+            fontSize: 14,
+          }
+        );
+      });
+
+      function runCode() {
+        const code = editor.getValue();
+        const outputEl = document.getElementById("output");
+        outputEl.innerHTML = "";
+
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        console.log = (...args) => {
+          const line = document.createElement("div");
+          line.textContent = args.join(" ");
+          line.style.color = "#9cdcfe";
+          outputEl.appendChild(line);
+          originalLog(...args);
+        };
+
+        console.error = (...args) => {
+          const line = document.createElement("div");
+          line.textContent = "Error: " + args.join(" ");
+          line.style.color = "#f44747";
+          line.style.fontWeight = "bold";
+          outputEl.appendChild(line);
+          originalError(...args);
+        };
+
+        try {
+          const AsyncFunction = Object.getPrototypeOf(
+            async function () {}
+          ).constructor;
+          const result = new AsyncFunction(code)();
+          if (result !== undefined) {
+            const resultLine = document.createElement("div");
+            resultLine.textContent = "Result: " + result;
+            resultLine.style.color = "#4fc1ff";
+            resultLine.style.fontWeight = "bold";
+            outputEl.appendChild(resultLine);
+          }
+        } catch (err) {
+          const errorLine = document.createElement("div");
+          errorLine.textContent = "Exception: " + err.message;
+          errorLine.style.color = "#f44747";
+          errorLine.style.fontWeight = "bold";
+          outputEl.appendChild(errorLine);
+        }
+
+        console.log = originalLog;
+        console.error = originalError;
+      }
+    </script>
   </body>
 </html>
