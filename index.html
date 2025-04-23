@@ -196,20 +196,20 @@
     </div>
 
     <!-- 스테이징 -->
-    <script src="https://cdn.flarelane.com/WebSDK-staging.js"></script>
+    <!-- <script src="https://cdn.flarelane.com/WebSDK-staging.js"></script> -->
 
     <!-- 프로덕션 -->
-    <!-- <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script> -->
+    <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
     <script>
       // 스테이징
-      FlareLane.initialize({
-        projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
-      });
+      // FlareLane.initialize({
+      //   projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
+      // });
 
       // 프로덕션
-      // FlareLane.initialize({
-      //   projectId: "2290ab3c-e6c8-423a-9576-c54fba1d9da0",
-      // });
+      FlareLane.initialize({
+        projectId: "2290ab3c-e6c8-423a-9576-c54fba1d9da0",
+      });
 
       window.addEventListener("load", () => {
         FlareLane.getDeviceId((deviceId) => {
