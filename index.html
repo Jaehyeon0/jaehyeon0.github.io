@@ -187,25 +187,25 @@
       </div>
     </div>
 
-    <!-- <button onclick="runCode()">▶ Run production!!</button> -->
-    <button onclick="runCode()">▶ Run staging!!</button>
+    <!-- <button onclick="runCode()">▶ Run staging!!</button> -->
+    <button onclick="runCode()">▶ Run production!!</button>
     <div id="output">Console Output:</div>
 
     <!-- 스테이징 -->
-    <script src="https://cdn.flarelane.com/WebSDK-staging.js"></script>
+    <!-- <script src="https://cdn.flarelane.com/WebSDK-staging.js"></script> -->
 
     <!-- 프로덕션 -->
-    <!-- <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script> -->
+    <script src="https://cdn.flarelane.com/WebSDK.js" charset="UTF-8"></script>
     <script>
       // 스테이징
-      FlareLane.initialize({
-        projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
-      });
+      // FlareLane.initialize({
+      //   projectId: "75702d8e-71ba-4255-b17a-78ee5daa94c5",
+      // });
 
       // 프로덕션
-      // FlareLane.initialize({
-      //   projectId: "5155beb9-0922-423d-9f9e-610a6ee3e95f",
-      // });
+      FlareLane.initialize({
+        projectId: "5155beb9-0922-423d-9f9e-610a6ee3e95f",
+      });
 
       window.addEventListener("load", () => {
         FlareLane.getDeviceId((deviceId) => {
