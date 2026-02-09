@@ -208,6 +208,8 @@
       });
 
       window.addEventListener("load", () => {
+        FlareLane.displayInApp("story", { view: "77142" });
+
         FlareLane.getDeviceId((deviceId) => {
           const el = document.getElementById("device-id-display");
           el.textContent = deviceId
