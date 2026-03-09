@@ -208,7 +208,7 @@
       });
 
       window.addEventListener("load", () => {
-        FlareLane.displayInApp("home", { is_login_process: true });
+        FlareLane.displayInApp("home", { is_login_process: "false" });
 
         FlareLane.getDeviceId((deviceId) => {
           const el = document.getElementById("device-id-display");
